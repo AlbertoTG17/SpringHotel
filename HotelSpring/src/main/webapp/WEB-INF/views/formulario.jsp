@@ -28,7 +28,8 @@
 	            
 	            <tr>
 	                <td><label for="fechaSalida">Fecha de salida: </label> </td>
-	                <td><form:input path="fechaSalida" id="fechaSalida"/></td>	                
+	                <td><form:input path="fechaSalida" id="fechaSalida"/></td>	      
+	                <td>dd/MM/yyyy</td>          
 	            </tr>
 	            
 	            <tr>
@@ -43,6 +44,8 @@
 		 	<input type="submit" value="Reservar"/>
 		 	
 		</form:form>
+		
+		<a href="index.jsp">Ir al inicio</a>
 	
 	</div>
 

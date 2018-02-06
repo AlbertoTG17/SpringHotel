@@ -1,5 +1,7 @@
 package com.hotel.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,16 +30,22 @@ public class ReservaController {
 // 		return "user-info";
 // 	}
 	
+	@RequestMapping(value="/inicio")
+	public String principal() {
+		//Redireccion hacia el jsp del formulario
+		return "formulario";
+	}
+	
 	@RequestMapping(value="/verFormulario")
 	public String redirigirFormulario(@ModelAttribute("reserva") Reserva reserva) {
-		
+		//Redireccion hacia el jsp del formulario
 		return "formulario";
 	}
 	
 	@RequestMapping(value="/reservar")
 	public String guardarReserva( @ModelAttribute("reserva") Reserva reserva, ModelMap model, BindingResult result) {
 		
-		
+		//Inserta una reserva enm la tabla
 		
 		System.out.println("---> " + reserva.getEmail());
 		reservaService.insertar(reserva);
@@ -51,9 +59,18 @@ public class ReservaController {
  		return "access-denied";
  	}
 	
-	@RequestMapping(value="/privado")
-	public String privada() {
- 		return "privado";
+	@RequestMapping(value="/private")
+	public String privada(ModelMap model) {
+		
+		List <Reserva> listaReservas = reservaService.selectAll();
+		
+		model.addAttribute("lista", listaReservas);
+		
+		for (Reserva reserva : listaReservas) {
+			System.out.println("--> " + reserva.getEmail());
+		}
+		
+ 		return "listaReservas";
  	}
 	
 	

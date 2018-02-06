@@ -1,5 +1,7 @@
 package com.hotel.service;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,6 +19,11 @@ public class ReservaService implements IReservaService {
 	
 	public void insertar(Reserva reserva) {		
 		reservaDAO.insert(reserva);
+	}
+
+
+	public ArrayList<Reserva> selectAll() {		
+		return reservaDAO.selectAll();
 	}
 
 }

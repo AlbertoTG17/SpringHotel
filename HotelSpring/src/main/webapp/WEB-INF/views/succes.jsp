@@ -10,5 +10,9 @@
 REserva hecha
 ${mensaje}
 
+<br/>
+
+<a href="verFormulario">Volver al formulario</a>
+
 </body>
 </html>
