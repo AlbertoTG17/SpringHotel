@@ -1,8 +1,5 @@
 package com.hotel.controller;
 
-import java.util.List;
-
-import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -11,10 +8,11 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+
 
 import com.hotel.model.Reserva;
 import com.hotel.service.IReservaService;
+import com.hotel.service.IUserService;
 
 
 @Controller
@@ -22,6 +20,9 @@ public class ReservaController {
 	
 	@Autowired
 	private IReservaService reservaService;
+	
+	@Autowired
+	private  IUserService userService;
 //	
 //	@RequestMapping(value="/home")
 //	public String home(ModelMap model, Authentication authentication) {
@@ -60,16 +61,14 @@ public class ReservaController {
  	}
 	
 	@RequestMapping(value="/private")
-	public String privada(ModelMap model) {
+	public String privada(ModelMap model, Authentication authentication) {
+				
+		authentication.getPrincipal();
 		
-		List <Reserva> listaReservas = reservaService.selectAll();
+		//model.addAttribute("user", userService.getDataByUserName(authentication.getName()));
 		
-		model.addAttribute("lista", listaReservas);
-		
-		for (Reserva reserva : listaReservas) {
-			System.out.println("--> " + reserva.getEmail());
-		}
-		
+		model.addAttribute("lista", reservaService.selectAll());
+
  		return "listaReservas";
  	}
 	
